@@ -2,8 +2,25 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const express = require('express');
 
-// Ticket modülünü içe aktarma
+// ==========================================
+// RENDER VE UPTIMEROBOT İÇİN WEB SUNUCUSU
+// ==========================================
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get('/', (req, res) => {
+  res.send('aizenefe bot 7/24 aktif ve çalışıyor!');
+});
+
+app.listen(port, () => {
+  console.log(`🌐 Web sunucusu port dinliyor: ${port}`);
+});
+
+// ==========================================
+// TICKET MODÜLÜ VE DISCORD BOT KURULUMU
+// ==========================================
 const ticket = require('./kodlar/ticket');
 
 const client = new Client({
