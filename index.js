@@ -101,4 +101,13 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-client.login(process.env.TOKEN);
+// Token kontrolü ve hata yakalama ekleyelim
+if (!process.env.TOKEN) {
+  console.log("❌ HATA: TOKEN bulunamadı! Render Environment kısmını kontrol et.");
+} else {
+  console.log("🔑 Token algılandı, Discord'a bağlanılıyor...");
+}
+
+client.login(process.env.TOKEN)
+  .then(() => console.log("🤖 Discord bağlantısı başarıyla tamamlandı!"))
+  .catch(err => console.error("❌ Discord bağlantı hatası:", err));
